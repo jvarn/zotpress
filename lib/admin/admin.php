@@ -38,6 +38,14 @@ function zotpress_get_default_style()
 	return $zp_default_style;
 }
 
+function zotpress_get_default_shortcode_options()
+{
+    $zp_default_shortcode_options = NULL;
+    if ( get_option("Zotpress_ShortcodeDefaults") )
+        $zp_default_shortcode_options = get_option("Zotpress_ShortcodeDefaults");
+
+    return $zp_default_shortcode_options;
+}
 
 function Zotpress_process_accounts_AJAX()
 {
@@ -272,6 +280,25 @@ function Zotpress_process_accounts_AJAX()
             }
         }
 
+
+        // +------------------------+
+        // | SET SHORTCODE DEFAULTS |
+        // +------------------------+
+        
+        elseif ( isset($_GET['action_type'])
+                && $_GET['action_type'] == "shortcode_defaults" )
+        {
+            if ( isset($_GET['defaults']) && is_array($_GET['defaults']) )
+            {
+                update_option("Zotpress_ShortcodeDefaults", $_GET['defaults']);
+                echo "<result success='true'></result>";
+            }
+            else {
+                echo "<result success='false'><errors>Invalid shortcode defaults data</errors></result>";
+            }
+        
+            die();
+        }
 
         // +-------------------+
         // | SET DEFAULT STYLE |

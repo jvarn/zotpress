@@ -34,20 +34,40 @@ jQuery(document).ready(function()
     //   VARIABLES
     //
 
-    window.zpBiblio = {
-		"author": false, "year": false, "style": false, "sortby": false,
+    // window.zpBiblio = {
+	// 	"author": false, "year": false, "style": false, "sortby": false,
+    //     "sort": false, "image": false, "download": false, "notes": false,
+    //     "zpabstract": false, "cite": false, "title": false, "limit": false
+	// };
+    // window.zpInText = {
+	// 	"format": false, "etal": false, "and": false, "separator": false,
+    //     "brackets": false
+	// };
+    // window.zpInTextBib = {
+	// 	"style": false, "sortby": false, "sort": false, "image": false,
+    //     "title": false, "download": false, "zpabstract": false,
+    //     "notes": false, "cite": false
+	// };
+    
+    window.zpBiblio = Object.assign({
+        "author": false, "year": false, "style": false, "sortby": false,
         "sort": false, "image": false, "download": false, "notes": false,
         "zpabstract": false, "cite": false, "title": false, "limit": false
-	};
-    window.zpInText = {
-		"format": false, "etal": false, "and": false, "separator": false,
+    }, (window.zpSavedDefaults && window.zpSavedDefaults.zp_biblio) || {});
+    
+    window.zpInText = Object.assign({
+        "format": false, "etal": false, "and": false, "separator": false,
         "brackets": false
-	};
-    window.zpInTextBib = {
-		"style": false, "sortby": false, "sort": false, "image": false,
+    }, (window.zpSavedDefaults && window.zpSavedDefaults.zp_intext) || {});
+    
+    window.zpInTextBib = Object.assign({
+        "style": false, "sortby": false, "sort": false, "image": false,
         "title": false, "download": false, "zpabstract": false,
         "notes": false, "cite": false
-	};
+    }, (window.zpSavedDefaults && window.zpSavedDefaults.zp_intextbib) || {});
+    
+    console.log("Zotpress defaults:", window.zpSavedDefaults);
+    
 	window.zpRefItems = [];
 
 

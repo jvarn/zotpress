@@ -832,5 +832,59 @@ jQuery(document).ready( function()
 	});
 
 
+	/*
+	
+		SAVE SHORTCODE DEFAULTS
+	
+	*/
 
+	jQuery("#zp-Zotpress-Options-ShortcodeDefaults input, #zp-Zotpress-Options-ShortcodeDefaults select").on("change", function() {
+		let shortcodeDefaults = {
+			zp_biblio: {},
+			zp_intext: {},
+			zp_intextbib: {}
+		};
+	
+		// Bibliography [zotpress]
+		jQuery("#zp-Zotpress-Options-ShortcodeDefaults input[name^='zp_biblio']").each(function() {
+			let name = jQuery(this).attr("name").match(/\[([^\]]+)\]/)[1];
+			shortcodeDefaults.zp_biblio[name] = jQuery(this).is(":checkbox") ? jQuery(this).is(":checked") : jQuery(this).val();
+		});
+	
+		// In-Text [zotpressInText]
+		jQuery("#zp-Zotpress-Options-ShortcodeDefaults input[name^='zp_intext']").each(function() {
+			let name = jQuery(this).attr("name").match(/\[([^\]]+)\]/)[1];
+			shortcodeDefaults.zp_intext[name] = jQuery(this).is(":checkbox") ? jQuery(this).is(":checked") : jQuery(this).val();
+		});
+	
+		// In-Text Bib [zotpressInTextBib]
+		jQuery("#zp-Zotpress-Options-ShortcodeDefaults input[name^='zp_intextbib']").each(function() {
+			let name = jQuery(this).attr("name").match(/\[([^\]]+)\]/)[1];
+			shortcodeDefaults.zp_intextbib[name] = jQuery(this).is(":checkbox") ? jQuery(this).is(":checked") : jQuery(this).val();
+		});
+	
+		// AJAX call to save defaults
+		jQuery.ajax({
+			url: zpAccountsAJAX.ajaxurl,
+			data: {
+				action: 'zpAccountsViaAJAX',
+				action_type: 'shortcode_defaults',
+				defaults: shortcodeDefaults,
+				zpAccountsAJAX_nonce: zpAccountsAJAX.zpAccountsAJAX_nonce
+			},
+			xhrFields: {
+				withCredentials: true
+			},
+			success: function(xml) {
+				let result = jQuery('result', xml).attr('success');
+				if (result === "true") {
+					console.log("Shortcode defaults saved.");
+				}
+				else {
+					console.warn("Failed to save shortcode defaults.");
+				}
+			}
+		});
+	});
+	
 });

@@ -220,4 +220,21 @@ add_action('admin_print_styles-post.php', 'Zotpress_admin_post_styles');
 add_action('admin_print_styles-post-new.php', 'Zotpress_admin_post_styles');
 
 
+/**
+* Shortcode defaults
+*/
+function Zotpress_widget_output_shortcode_defaults()
+{
+	// Only output on post editor screens
+	$screen = get_current_screen();
+	if ( in_array( $screen->base, ['post', 'post-new'] ) )
+	{
+		$zp_shortcode_defaults = get_option("Zotpress_ShortcodeDefaults", []);
+		echo '<script type="text/javascript">';
+		echo 'window.zpSavedDefaults = ' . wp_json_encode($zp_shortcode_defaults) . ';';
+		echo '</script>';
+	}
+}
+add_action('admin_footer', 'Zotpress_widget_output_shortcode_defaults');
+
 ?>

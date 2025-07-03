@@ -111,6 +111,52 @@ if ( current_user_can('edit_others_posts') ) {
 
 						</div>
 						<!-- END OF STYLE -->
+						
+						
+						<!-- ADDING SHORTCODE DEFAULTS -->
+							
+						<div id="zp-Zotpress-Options-ShortcodeDefaults" class="zp-Zotpress-Options">
+							<h3>Set Default Shortcode Options</h3>
+						
+							<p class="description">Choose the default options that should be used when generating shortcodes from the Zotpress citation tool.</p>
+						
+							<table class="form-table">
+						
+								<tr>
+									<th scope="row">Bibliography [zotpress]</th>
+									<td>
+										<label><input type="checkbox" name="zp_biblio[author]" <?php checked($zp_options['zp_biblio']['author'] ?? false); ?> /> Author</label><br />
+										<label><input type="checkbox" name="zp_biblio[year]" <?php checked($zp_options['zp_biblio']['year'] ?? false); ?> /> Year</label><br />
+										<label><input type="checkbox" name="zp_biblio[title]" <?php checked($zp_options['zp_biblio']['title'] ?? false); ?> /> Title</label><br />
+										<label><input type="checkbox" name="zp_biblio[zpabstract]" <?php checked($zp_options['zp_biblio']['zpabstract'] ?? false); ?> /> Abstract</label><br />
+										<label><input type="checkbox" name="zp_biblio[notes]" <?php checked($zp_options['zp_biblio']['notes'] ?? false); ?> /> Notes</label><br />
+										<label><input type="checkbox" name="zp_biblio[download]" <?php checked($zp_options['zp_biblio']['download'] ?? false); ?> /> Download</label><br />
+										<!-- Add more if needed -->
+									</td>
+								</tr>
+						
+								<tr>
+									<th scope="row">In-Text [zotpressInText]</th>
+									<td>
+										<label><input type="checkbox" name="zp_intext[etal]" <?php checked($zp_options['zp_intext']['etal'] ?? false); ?> /> et al.</label><br />
+										<label><input type="checkbox" name="zp_intext[and]" <?php checked($zp_options['zp_intext']['and'] ?? false); ?> /> "and" separator</label><br />
+										<label><input type="text" name="zp_intext[separator]" value="<?php echo esc_attr($zp_options['zp_intext']['separator'] ?? ','); ?>" placeholder="e.g. , or ;" /> Separator</label><br />
+									</td>
+								</tr>
+						
+								<tr>
+									<th scope="row">In-Text Bib [zotpressInTextBib]</th>
+									<td>
+										<label><input type="checkbox" name="zp_intextbib[title]" <?php checked($zp_options['zp_intextbib']['title'] ?? false); ?> /> Title</label><br />
+										<label><input type="checkbox" name="zp_intextbib[zpabstract]" <?php checked($zp_options['zp_intextbib']['zpabstract'] ?? false); ?> /> Abstract</label><br />
+										<label><input type="checkbox" name="zp_intextbib[notes]" <?php checked($zp_options['zp_intextbib']['notes'] ?? false); ?> /> Notes</label><br />
+									</td>
+								</tr>
+						
+							</table>
+						</div>
+												
+						<!-- END OF SHORTCODE DEFAULTS -->
 
 					</div>
 				</div>
